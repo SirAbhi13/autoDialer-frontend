@@ -3,16 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --primary-color: 59, 130, 246;
+  --secondary-color: 99, 102, 241;
+  --accent-color: 239, 68, 68;
+  --background-light: 249, 250, 251;
+  --background-dark: 17, 24, 39;
+  --text-light: 31, 41, 55;
+  --text-dark: 243, 244, 246;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: var(--text-dark);
+    --background-start-rgb: var(--background-dark);
+    --background-end-rgb: var(--background-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --foreground-rgb: var(--text-light);
+    --background-start-rgb: var(--background-light);
+    --background-end-rgb: var(--background-light);
   }
 }
 
@@ -24,10 +36,68 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-family: 'Inter', sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-4;
+  }
+  h2 {
+    @apply text-3xl font-semibold mb-3;
+  }
+  h3 {
+    @apply text-2xl font-medium mb-2;
+  }
+  a {
+    @apply text-blue-600 hover:text-blue-800 transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-semibold text-white transition-all duration-200 ease-in-out;
+  }
+  .btn-primary {
+    @apply bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-300;
+  }
+  .btn-secondary {
+    @apply bg-indigo-500 hover:bg-indigo-600 focus:ring-2 focus:ring-indigo-300;
+  }
+  .btn-accent {
+    @apply bg-red-500 hover:bg-red-600 focus:ring-2 focus:ring-red-300;
+  }
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.glass-effect {
+  @apply bg-opacity-20 backdrop-filter backdrop-blur-lg;
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600;
 }
